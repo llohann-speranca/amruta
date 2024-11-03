@@ -1,4 +1,3 @@
-import pandas as pd
 from docx import Document
 import os
 from csv import DictWriter
@@ -8,9 +7,10 @@ from tqdm import tqdm
 import traceback
 
 
-def get_metadata_file(path="./data/metadata/2024-02-xx Maha talks list .xlsx"):
-    metadata_df = pd.read_excel(path, index_col=0)
-    return metadata_df
+# def get_metadata_file(path="./data/metadata/2024-02-xx Maha talks list .xlsx"):
+#     import pandas as pd
+#     metadata_df = pd.read_excel(path, index_col=0)
+#     return metadata_df
 
 
 def parse_metadata_from_talk(talk: list[str]):
@@ -82,7 +82,6 @@ class TalkReader:
         document_text = [p.text for p in self.document.paragraphs]
         document_text = "\n\n".join(document_text)
         return document_text
-        
 
     def process_document(self):
         # document = [p.text for p in document.paragraphs]
