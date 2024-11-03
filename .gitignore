@@ -1,0 +1,11 @@
+*.docx
+*.csv
+
+*.md
+.DS_Store
+.vscode
+.idea
+*.txt
+__pycache__/
+*.zip
+*.xlsx
