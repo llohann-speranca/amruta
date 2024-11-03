@@ -170,14 +170,15 @@ class TalkReader:
 
     @staticmethod
     def _extract_date(date_string: str) -> tuple[str, str]:
-        date_string = date_string.replace("Date Unknown", "1 January 0001")
+        date_string = date_string.replace("Date Unknown", "1 January 1111")
         date_string = re.sub(
-            "[^A-Za-z0-9 ]|1001|th", "", date_string.strip().replace("  ", " ")
+            "[^A-Za-z0-9 ]|th", "", date_string.strip().replace("  ", " ")
         )
+        date_string = date_string.replace("1001", "")
         date_string = date_string.replace("Octobre", "October")
-        date_string = date_string.replace("199\n", "0000")
-        date_string = date_string.replace("200\n", "0000")
-        date_string = date_string.replace("Year Unknown", "0000")
+        date_string = re.sub(r"199$", "199X", date_string)
+        date_string = re.sub(r"200$", "200X", date_string)
+        date_string = date_string.replace("Year Unknown", "1111")
         try:
             return datetime.strptime(date_string, "%d %B %Y").strftime("%Y-%m-%d"), ""
         except ValueError:
