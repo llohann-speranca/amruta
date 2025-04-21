@@ -1,3 +1,4 @@
+from pathlib import Path
 from docx import Document
 import os
 from csv import DictWriter
@@ -166,7 +167,11 @@ class TalkReader:
         save_file_name = (
             f"{date_iso} – {metadata['Title']} – {metadata['Location']}.docx"
         )
-        document.save(os.path.join(save_folder, save_file_name))
+        save_file_name = Path(save_file_name)
+        save_folder = Path(save_folder)
+        _save_folder = save_folder / save_file_name.stem
+        _save_folder.mkdir(exist_ok=True)
+        document.save(_save_folder / save_file_name)
 
     @staticmethod
     def _extract_date(date_string: str) -> tuple[str, str]:
